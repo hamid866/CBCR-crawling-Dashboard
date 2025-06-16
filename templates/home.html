@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <!-- Linking Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #121212; /* Dark background color */
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        .welcome-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 60px; /* Large text */
+            font-weight: 600;
+            color: #fff; /* Initially white text */
+            text-align: center;
+            position: relative;
+            animation: fadeInText 3s ease-out forwards;
+            letter-spacing: 4px;
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px); /* Start above */
+                color: #ff6347; /* Orange color at the start */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* Text moves to its original position */
+                color: #fff; /* White color at the end */
+            }
+        }
+
+    </style>
+    <script>
+        // Redirect to login after 3.5 seconds
+        setTimeout(function () {
+            window.location.href = "/login";
+        }, 3500);
+    </script>
+</head>
+<body>
+    <div class="welcome-text">
+        Welcome to the ZEW
+    </div>
+</body>
+</html>

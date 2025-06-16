@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>History of User Activity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    /* Base Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 95%;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      color: #34495e;
+      margin-bottom: 30px;
+    }
+
+    /* Responsive Table Container */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    /* Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      table-layout: fixed; /* Forces fixed layout so that columns follow defined widths */
+    }
+
+    /* Define fixed column widths */
+    colgroup col:nth-child(1) { width: 15%; }
+    colgroup col:nth-child(2) { width: 15%; }
+    colgroup col:nth-child(3) { width: 15%; }
+    colgroup col:nth-child(4) { width: 20%; }
+    colgroup col:nth-child(5) { width: 35%; }
+
+    table th, table td {
+      padding: 15px;
+      text-align: center;
+      font-size: 1.1rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    table th {
+      background-color: #2ecc71;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    table td {
+      background-color: #ecf0f1;
+      color: #2c3e50;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table tr:hover {
+      background-color: #f1c40f;
+      cursor: pointer;
+    }
+
+    /* Button Styles */
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+
+    a.button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      table th, table td {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+      .container {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>History</h1>
+    <div class="table-container">
+      <table>
+        <colgroup>
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Action</th>
+            <th>File Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in history_records %}
+            <tr>
+              <td>{{ record.username }}</td>
+              <td>{{ record.date.strftime('%Y-%m-%d') }}</td>
+              <td>{{ record.date.strftime('%H:%M:%S') }}</td>
+              <td>{{ record.action }}</td>
+              <td>
+                {% if record.file_path %}
+                  {{ record.file_path }}
+                {% else %}
+                  N/A
+                {% endif %}
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="5">No history records found.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <a class="button" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+  </div>
+</body>
+</html>

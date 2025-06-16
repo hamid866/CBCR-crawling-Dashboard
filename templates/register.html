@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Import Google Fonts like Login Page -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,300&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            font-family: 'Roboto Slab', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            animation: fadeBackground 2s ease-in-out;
+            overflow: hidden;
+        }
+        .background-text {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            font-family: 'Playfair Display', serif;
+            color: rgba(255, 255, 255, 0);
+            font-style: italic;
+            font-weight: 300;
+            text-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+            animation: appearFromBackground 3s ease-in-out forwards;
+            text-align: center;
+        }
+        .register-container {
+            margin-top: 150px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            color: #f0f0f0;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 14px;
+            background: #222;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #6a11cb;
+            box-shadow: 0px 0px 8px rgba(106, 17, 203, 0.5);
+            outline: none;
+        }
+        button {
+            background: #6a11cb;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #2575fc;
+            transform: translateY(-3px);
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        .flash.error {
+            background: #e74c3c;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            animation: fadeIn 0.7s;
+        }
+        .flash.success {
+            background: #27ae60;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes fadeBackground {
+            from { opacity: 0;}
+            to { opacity: 1;}
+        }
+        @keyframes appearFromBackground {
+            from {
+                color: rgba(255, 255, 255, 0);
+                transform: translateX(-50%) scale(0.9);
+            }
+            to {
+                color: rgba(255, 255, 255, 1);
+                transform: translateX(-50%) scale(1);
+            }
+        }
+        .back-to-login {
+            margin-top: 15px;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .back-to-login:hover {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-text">Register Yourself!!</div>
+    <div class="register-container">
+        <!-- FLASH MESSAGES -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <!-- REGISTRATION FORM -->
+        <form method="POST" action="/register" autocomplete="off">
+            <h2>Register</h2>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <a href="{{ url_for('login') }}" class="back-to-login">Back to Login</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Importing Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,300&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            font-family: 'Roboto Slab', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            animation: fadeBackground 2s ease-in-out;
+            overflow: hidden;
+        }
+
+        .background-text {
+            position: absolute;
+            top: 10%; /* Increased spacing from the top */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px; /* Increased font size for emphasis */
+            font-family: 'Playfair Display', serif; /* Applied thin and italic font */
+            color: rgba(255, 255, 255, 0); /* Initially invisible */
+            font-style: italic; /* Ensures the italic effect */
+            font-weight: 300; /* Thin font weight */
+            text-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+            animation: appearFromBackground 3s ease-in-out forwards;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 150px; /* Added margin to create space below the text */
+            background: rgba(0, 0, 0, 0.8); /* Darkened background for the form */
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #f0f0f0;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 14px;
+            background: #222;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #6a11cb;
+            box-shadow: 0px 0px 8px rgba(106, 17, 203, 0.5);
+            outline: none;
+        }
+
+        button {
+            background: #6a11cb;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #2575fc;
+            transform: translateY(-3px);
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        p a {
+            color: #ffd700;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        p a:hover {
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeBackground {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes appearFromBackground {
+            from {
+                color: rgba(255, 255, 255, 0); /* Completely transparent */
+                transform: translateX(-50%) scale(0.9); /* Slightly smaller and faded */
+            }
+            to {
+                color: rgba(255, 255, 255, 1); /* Fully visible */
+                transform: translateX(-50%) scale(1); /* Normal size */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-text">Leibniz Center for European Economic Research</div>
+    <form method="POST">
+        <h2>Login</h2>
+
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+        
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+.welcome-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 3em;
+    font-weight: bold;
+    animation: moveText 5s ease-in-out forwards;
+}
+
+@keyframes moveText {
+    0% { left: 0; }
+    50% { left: 50%; transform: translate(-50%, -50%); }
+    100% { left: 50%; transform: translate(-50%, -50%); }
+}
+  
+
+
+body {
+    background-image: url('/static/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input, form button {
+    margin-bottom: 10px;
+    padding: 10px;
+}
